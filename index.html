@@ -6,16 +6,19 @@
 .gallery-toolbar{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}.gallery-toolbar input,.gallery-toolbar select{flex:1;min-width:130px;border:1px solid #cbdfea;border-radius:11px;padding:11px;color:#405b70;background:#fff;font-size:14px}.gallery{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;margin-top:14px}.gallery-card{border:1px solid #dcebf4;background:#f8fcff;border-radius:12px;overflow:hidden;cursor:pointer;padding:0;text-align:left;color:inherit}.gallery-card img{width:100%;aspect-ratio:3/4;object-fit:cover;display:block;background:#eaf4fb}.gallery-card .gtitle{display:block;padding:7px 8px;font-size:11px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.gallery-card .gdate{display:block;padding:0 8px 8px;font-size:10px;color:#8ca7bb}.lightbox{position:fixed;inset:0;z-index:50;background:#102533ed;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:55px 15px 24px;color:#fff}.lightbox[hidden]{display:none}.lightbox img{max-width:100%;max-height:75vh;object-fit:contain;border-radius:8px}.lightbox .close{position:absolute;top:15px;right:16px;background:#fff;border:0;border-radius:30px;padding:10px 15px;font-size:17px}.lightbox p{font-size:13px;text-align:center;overflow-wrap:anywhere}.gallery-empty{grid-column:1/-1;text-align:center;padding:35px 10px;color:#91aaba;font-size:13px}@media(max-width:430px){.gallery{grid-template-columns:repeat(2,minmax(0,1fr))}}
 
 /* V1.8: independent scrolling previews */
-#grid{max-height:420px;overflow-y:auto;overscroll-behavior:contain;padding:3px;align-content:start}
+#grid{display:block;max-height:420px;overflow-y:auto;overscroll-behavior:contain;padding:3px;align-content:start}
 #gallery{max-height:520px;overflow-y:auto;overscroll-behavior:contain;padding:3px;align-content:start}
 .gallery-filters{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0}
 .gallery-filters select{flex:1;min-width:130px;padding:11px;font-size:14px}
 .gallery-summary{font-size:12px;color:#7894a9;margin:8px 0}
 
+/* V2.0 row-based preview */
+.preview-row{display:grid;grid-template-columns:repeat(var(--cols,3),minmax(0,1fr));gap:8px;margin-bottom:9px;align-items:start}
+.preview-unit{min-width:0}.preview-unit .tile{width:100%}.break-btn{width:100%;padding:5px 2px;border:1px dashed #bfd9eb;border-radius:8px;background:#f7fbff;color:#648aa4;font-size:11px;margin-top:4px;cursor:pointer}.break-btn.active{background:#f8e6f2;border-color:#e4b8d2;color:#975f80}.upload-target{border-color:#8bbfdf!important;background:#e9f5fd!important}.new-photo-card{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:175px;border:2px dashed #c2dcec;border-radius:12px;background:#f2faff;color:#618aa5;font-weight:700;cursor:pointer;gap:12px}.new-photo-card .plus{font-size:36px;font-weight:300}.upload-form input{width:100%;padding:12px;border:1px solid #cbdfea;border-radius:10px;font-size:14px;margin:5px 0 10px;color:#405b70}.upload-form label{display:block;font-size:12px;color:#7894a9;margin-top:10px}.upload-form[hidden]{display:none}
 /* V1.9 SCHEDULE calendar */
 .cal-head{display:flex;align-items:center;justify-content:space-between;gap:8px;margin:12px 0}.cal-head strong{font-size:16px}.cal-nav{border:1px solid #cbdfea;border-radius:10px;background:#f5faff;color:#53748b;padding:9px 13px;cursor:pointer}.cal-week,.cal-days{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:5px}.cal-week span{text-align:center;font-size:11px;color:#8ca7bb;padding:6px 0}.cal-day{min-height:75px;border:1px solid #e1edf5;border-radius:10px;background:#fff;padding:6px 4px;min-width:0}.cal-day.other{opacity:.35}.cal-day.today{border-color:#83bfe2}.cal-num{font-size:11px;color:#69889e;margin-bottom:4px}.cal-event{display:block;width:100%;border:0;border-radius:6px;background:#e8f4fb;color:#345b75;font-size:10px;text-align:left;padding:4px 5px;margin:3px 0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;cursor:pointer}.cal-event.has-photo{background:#f9eaf4;color:#895f80}.cal-more{font-size:10px;color:#7894a9}.cal-legend{font-size:11px;color:#7894a9;margin:9px 0}.cal-dialog{position:fixed;inset:0;z-index:60;background:#102533b0;display:grid;place-items:center;padding:18px}.cal-dialog[hidden]{display:none}.cal-dialog-inner{background:#fff;border-radius:18px;padding:20px;width:min(100%,420px);max-height:80vh;overflow:auto}.cal-photo-link{display:block;border:1px solid #dcebf4;border-radius:10px;padding:12px;margin:9px 0;color:#345b75;text-decoration:none;overflow-wrap:anywhere}@media(max-width:430px){.cal-day{min-height:65px;padding:4px 2px}.cal-event{font-size:9px;padding:4px 2px}.cal-days,.cal-week{gap:3px}}
 </style></head><body>
-<header><small>† OUR LITTLE HEAVEN †</small><h1>♡ PHOTO ARCHIVE ♡</h1><small>iOS PREVIEW · V1.9</small></header><main class="shell"><section class="card login-card"><div class="label">00 · PRIVATE ACCESS</div><p class="notice">♡ OUR LITTLE HEAVEN 전용 비밀번호를 입력해 줘. 비밀번호는 기기에 저장하지 않아.</p><form id="login-form"><label for="archive-password" class="notice">ARCHIVE PASSWORD</label><input class="login-field" id="archive-password" type="password" autocomplete="off" required placeholder="비밀번호 입력"><div class="row"><button class="btn primary" id="login-btn" type="submit">♡ CONNECT</button><button class="btn" id="logout-btn" type="button" hidden>연결 해제</button></div><div class="login-status" id="login-status" role="status" aria-live="polite">연결 전 · 사진 선택과 정렬은 로그인 없이도 가능해.</div></form></section><section class="card"><div class="label">01 · ADD PHOTOS</div><div class="row"><button class="btn primary" id="pick">＋ 사진 불러오기</button><button class="btn" id="clear">전체 비우기</button></div><input type="file" id="files" accept="image/*" multiple><div class="stat" id="count">사진 0장</div></section><section class="card"><div class="label">02 · PHOTO ORDER</div><div class="row"><button class="btn active" data-mode="portrait">세로 먼저</button><button class="btn" data-mode="landscape">가로 먼저</button><button class="btn" data-mode="free">자유 배치</button></div><div class="setting"><label for="cols">미리보기 한 줄 사진 수</label><select id="cols"><option>1</option><option>2</option><option selected>3</option><option>4</option><option>5</option></select></div><p class="notice">자유 배치에서는 사진을 길게 누른 채 다른 사진 위로 끌어 순서를 바꿀 수 있어.</p></section><section class="card"><div class="label">03 · PHOTO PREVIEW</div><div id="grid" class="grid" style="--cols:3"><div class="empty">♡ 사진을 추가하면 여기에 표시돼</div></div></section><section class="card"><div class="label">04 · NOTION CONNECTION</div><p class="notice">로그인 후 PHOTO 목록을 불러오거나 사진을 새 PHOTO 항목으로 저장할 수 있어. 기존 PHOTO에 사진을 추가하거나 제목·촬영일을 입력해 새 PHOTO를 만들 수 있어. 노션에 저장된 사진을 갤러리로 볼 수 있어. 노션 파일 URL은 시간이 지나면 만료되므로 새로 불러와 줘.</p><button class="btn primary" id="load-notion" type="button">♡ 노션 PHOTO 목록 불러오기</button><div class="notion-status" id="notion-status" role="status" aria-live="polite">로그인한 다음 목록을 불러올 수 있어.</div><div class="gallery-toolbar"><input id="gallery-search" type="search" placeholder="♡ 사진 이름 검색" aria-label="사진 이름 검색"><select id="gallery-sort" aria-label="촬영일 정렬"><option value="new">촬영일 최신순</option><option value="old">촬영일 오래된순</option><option value="name">이름순</option></select></div><div class="gallery-filters"><select id="gallery-group" aria-label="사진 분류"><option value="all">전체 사진</option><option value="date">날짜별</option><option value="schedule">스케줄별</option><option value="unlinked">미분류 사진</option></select><select id="gallery-filter" aria-label="분류 선택" hidden></select></div><div id="gallery-summary" class="gallery-summary"></div><div class="gallery" id="gallery"><div class="gallery-empty">♡ 노션 PHOTO 목록을 불러오면 사진이 표시돼</div></div><button class="btn" id="load-more" type="button" style="width:100%;margin-top:12px" hidden>＋ 사진 더 불러오기</button><div class="notion-items" id="notion-items" hidden></div><hr style="border:0;border-top:1px solid #dcebf4;margin:18px 0"><div class="label">05 · UPLOAD ONE PHOTO</div><p class="notice">위에서 사진을 불러온 뒤 저장할 사진을 선택해 줘. JPEG · PNG · WebP · GIF, 최대 10MB. 아래에서 저장할 PHOTO를 선택해 줘.</p><div class="setting"><label for="upload-mode">저장 방식</label><select id="upload-mode"><option value="legacy">사진마다 새 PHOTO (기존 방식)</option><option value="existing">기존 PHOTO에 추가</option><option value="new">새 PHOTO 하나 만들기</option></select></div><div id="existing-fields" hidden><select id="target-page" class="login-field" style="margin-top:10px"><option value="">PHOTO 목록을 먼저 불러와 줘</option></select><button id="all-targets" class="btn" type="button" style="margin:10px 0">저장할 PHOTO 목록 전체 불러오기</button></div><div id="new-fields" hidden><label class="notice" for="photo-title">PHOTO 제목</label><input id="photo-title" class="login-field" maxlength="200" placeholder="제목 입력"><label class="notice" for="photo-date">촬영일</label><input id="photo-date" class="login-field" type="date"><button id="new-target" class="btn" type="button" style="margin:10px 0">＋ 다음 업로드에 새 PHOTO 만들기</button><div id="target-status" class="notice"></div></div><select id="upload-choice" class="login-field" aria-label="업로드할 사진 선택"><option value="">먼저 사진을 불러와 줘</option></select><button class="btn primary" id="upload-one" type="button" style="width:100%;margin-top:10px">♡ 선택한 사진 1장 노션에 저장</button><div class="upload-status" id="upload-status" role="status" aria-live="polite">로그인한 뒤 업로드할 수 있어.</div><hr style="border:0;border-top:1px solid #dcebf4;margin:18px 0"><div class="label">06 · BATCH UPLOAD · V1.8</div><p class="notice">미리보기의 현재 순서대로 한 장씩 저장해. 이미 성공한 사진은 다시 저장하지 않아. 오류가 발생하면 중단하고 결과를 확인해 줘.</p><button class="btn primary" id="upload-batch" type="button" style="width:100%">♡ 미리보기 사진 모두 노션에 저장</button><progress class="batch-progress" id="batch-progress" value="0" max="1" hidden></progress><div class="upload-status" id="batch-status" role="status" aria-live="polite">사진을 불러오면 일괄 업로드할 수 있어.</div><div class="batch-results" id="batch-results"></div></section><section class="card" id="schedule-section"><div class="label">07 · SCHEDULE CALENDAR · V1.9</div><p class="notice">♡ 모든 일정을 볼 수 있어. 사진이 연결된 일정은 PHOTO 원본으로 이동하고, 사진이 없는 일정은 SCHEDULE 원본으로 이동해.</p><button class="btn primary" id="load-schedules" type="button">♡ SCHEDULE 캘린더 불러오기</button><div id="schedule-status" class="notion-status" role="status" aria-live="polite">로그인한 다음 캘린더를 불러와 줘.</div><div class="cal-head"><button class="cal-nav" id="cal-prev" type="button" aria-label="이전 달">‹</button><strong id="cal-month"></strong><button class="cal-nav" id="cal-next" type="button" aria-label="다음 달">›</button></div><div class="cal-week"><span>일</span><span>월</span><span>화</span><span>수</span><span>목</span><span>금</span><span>토</span></div><div class="cal-days" id="cal-days"></div><div class="cal-legend">♡ 분홍: PHOTO 연결 · 하늘색: 일반 일정</div></section></main><div id="lightbox" class="lightbox" hidden role="dialog" aria-modal="true" aria-label="사진 확대"><button id="lightbox-close" class="close" type="button">✕ 닫기</button><img id="lightbox-image" alt="확대 사진"><p id="lightbox-caption"></p></div>
+<header><small>† OUR LITTLE HEAVEN †</small><h1>♡ PHOTO ARCHIVE ♡</h1><small>iOS PREVIEW · V2.0</small></header><main class="shell"><section class="card login-card"><div class="label">00 · PRIVATE ACCESS</div><p class="notice">♡ OUR LITTLE HEAVEN 전용 비밀번호를 입력해 줘. 비밀번호는 기기에 저장하지 않아.</p><form id="login-form"><label for="archive-password" class="notice">ARCHIVE PASSWORD</label><input class="login-field" id="archive-password" type="password" autocomplete="off" required placeholder="비밀번호 입력"><div class="row"><button class="btn primary" id="login-btn" type="submit">♡ CONNECT</button><button class="btn" id="logout-btn" type="button" hidden>연결 해제</button></div><div class="login-status" id="login-status" role="status" aria-live="polite">연결 전 · 사진 선택과 정렬은 로그인 없이도 가능해.</div></form></section><section class="card"><div class="label">01 · ADD PHOTOS</div><div class="row"><button class="btn primary" id="pick">＋ 사진 불러오기</button><button class="btn" id="clear">전체 비우기</button></div><input type="file" id="files" accept="image/*" multiple><div class="stat" id="count">사진 0장</div></section><section class="card"><div class="label">02 · PHOTO ORDER</div><div class="row"><button class="btn active" data-mode="portrait">세로 먼저</button><button class="btn" data-mode="landscape">가로 먼저</button><button class="btn" data-mode="free">자유 배치</button></div><div class="setting"><label for="cols">미리보기 한 줄 사진 수</label><select id="cols"><option>1</option><option>2</option><option selected>3</option><option>4</option><option>5</option></select></div><p class="notice">자유 배치에서는 사진을 길게 누른 채 다른 사진 위로 끌어 순서를 바꿀 수 있어.</p></section><section class="card"><div class="label">03 · PHOTO PREVIEW</div><div id="grid" class="grid" style="--cols:3"><div class="empty">♡ 사진을 추가하면 여기에 표시돼</div></div></section><section class="card"><div class="label">04 · NOTION CONNECTION</div><p class="notice">로그인 후 PHOTO 목록을 불러오거나 사진을 새 PHOTO 항목으로 저장할 수 있어. 기존 노션 항목은 수정하지 않아. 노션에 저장된 사진을 갤러리로 볼 수 있어. 노션 파일 URL은 시간이 지나면 만료되므로 새로 불러와 줘.</p><button class="btn primary" id="load-notion" type="button">♡ 노션 PHOTO 목록 불러오기</button><div class="notion-status" id="notion-status" role="status" aria-live="polite">로그인한 다음 목록을 불러올 수 있어.</div><div class="gallery-toolbar"><input id="gallery-search" type="search" placeholder="♡ 사진 이름 검색" aria-label="사진 이름 검색"><select id="gallery-sort" aria-label="촬영일 정렬"><option value="new">촬영일 최신순</option><option value="old">촬영일 오래된순</option><option value="name">이름순</option></select></div><div class="gallery-filters"><select id="gallery-group" aria-label="사진 분류"><option value="all">전체 사진</option><option value="date">날짜별</option><option value="schedule">스케줄별</option><option value="unlinked">미분류 사진</option></select><select id="gallery-filter" aria-label="분류 선택" hidden></select></div><div id="gallery-summary" class="gallery-summary"></div><div class="gallery" id="gallery"><div class="gallery-empty">♡ 노션 PHOTO 목록을 불러오면 사진이 표시돼</div></div><button class="btn" id="load-more" type="button" style="width:100%;margin-top:12px" hidden>＋ 사진 더 불러오기</button><div class="notion-items" id="notion-items" hidden></div><hr style="border:0;border-top:1px solid #dcebf4;margin:18px 0"><div class="label">05 · PHOTO UPLOAD · V2.0</div><p class="notice">위 PHOTO 목록의 썸네일을 누르면 기존 게시글에 사진을 추가할 수 있어. ＋ 새 게시글을 누르면 제목·촬영일을 입력해 새로 만들어. 미리보기의 전체 사진이 한 게시글 본문에 행·열 배치대로 저장돼.</p><div id="upload-target-label" class="notion-status">먼저 PHOTO 목록에서 게시글이나 ＋ 새 게시글을 선택해 줘.</div><div class="upload-form" id="upload-form" hidden><label id="upload-title-label" for="new-photo-title">새 PHOTO 제목</label><input id="new-photo-title" maxlength="200" placeholder="예: 261024"><label id="upload-date-label" for="new-photo-date">촬영일</label><input id="new-photo-date" type="date"><label for="cover-photo">대표 썸네일 (사진 속성에 1장만 저장)</label><select id="cover-photo" class="login-field"></select><p class="notice">미리보기에서 ↵ 버튼으로 줄을 나눠 줘. 기존 게시글은 기존 본문과 대표 사진을 그대로 보존해.</p><button class="btn primary" id="upload-layout" type="button" style="width:100%;margin-top:10px">♡ 현재 배치로 PHOTO 저장</button><progress class="batch-progress" id="batch-progress" value="0" max="1" hidden></progress><div class="upload-status" id="upload-status" role="status" aria-live="polite"></div></div></section><section class="card" id="schedule-section"><div class="label">07 · SCHEDULE CALENDAR · V1.9</div><p class="notice">♡ 모든 일정을 볼 수 있어. 사진이 연결된 일정은 PHOTO 원본으로 이동하고, 사진이 없는 일정은 SCHEDULE 원본으로 이동해.</p><button class="btn primary" id="load-schedules" type="button">♡ SCHEDULE 캘린더 불러오기</button><div id="schedule-status" class="notion-status" role="status" aria-live="polite">로그인한 다음 캘린더를 불러와 줘.</div><div class="cal-head"><button class="cal-nav" id="cal-prev" type="button" aria-label="이전 달">‹</button><strong id="cal-month"></strong><button class="cal-nav" id="cal-next" type="button" aria-label="다음 달">›</button></div><div class="cal-week"><span>일</span><span>월</span><span>화</span><span>수</span><span>목</span><span>금</span><span>토</span></div><div class="cal-days" id="cal-days"></div><div class="cal-legend">♡ 분홍: PHOTO 연결 · 하늘색: 일반 일정</div></section></main><div id="lightbox" class="lightbox" hidden role="dialog" aria-modal="true" aria-label="사진 확대"><button id="lightbox-close" class="close" type="button">✕ 닫기</button><img id="lightbox-image" alt="확대 사진"><p id="lightbox-caption"></p></div>
 <div id="cal-dialog" class="cal-dialog" hidden role="dialog" aria-modal="true" aria-label="연결된 PHOTO 선택"><div class="cal-dialog-inner"><div class="row" style="justify-content:space-between;align-items:center"><strong id="cal-dialog-title">PHOTO 선택</strong><button class="cal-nav" id="cal-dialog-close" type="button">닫기</button></div><div id="cal-dialog-links"></div></div></div><script>
 const API_URL='https://taemin-photo-api.ourlittleheaven.workers.dev';
 const loginForm=document.getElementById('login-form');
@@ -29,7 +32,6 @@ let sessionTimer = null;
 
 function disconnect(message = '연결 전 · 사진 선택과 정렬은 로그인 없이도 가능해.') {
   sessionToken = null;
-  newPhotoPageId=null;document.getElementById('photo-title').disabled=false;document.getElementById('photo-date').disabled=false;document.getElementById('target-status').textContent='';document.getElementById('target-page').replaceChildren(new Option('PHOTO 목록을 먼저 불러와 줘',''));
   if(typeof scheduleItems!=='undefined'){scheduleItems=[];renderCalendar();closeCalendarDialog();}
   document.getElementById('notion-items').replaceChildren();
   if(typeof galleryItems!=='undefined'){galleryItems=[];galleryCursor=null;galleryHasMore=false;renderGallery();loadMore.hidden=true;closeLightbox();}
@@ -154,22 +156,21 @@ function renderGallery(){
   updateGalleryFilters();
   const query=gallerySearch.value.trim().toLocaleLowerCase();
   const group=galleryGroup.value, selected=galleryFilter.value;
-  const entries=galleryItems.flatMap(item=>(item.photos||[]).map(photo=>({title:item.title,date:item.date,scheduleTitle:item.scheduleTitle||'',scheduleIds:item.scheduleIds||[],photo})))
-    .filter(entry=>entry.title.toLocaleLowerCase().includes(query)||entry.photo.name.toLocaleLowerCase().includes(query))
+  const entries=galleryItems.map(item=>({id:item.id,title:item.title||'제목 없음',date:item.date,scheduleTitle:item.scheduleTitle||'',scheduleIds:item.scheduleIds||[],photo:(item.photos||[])[0]||null}))
+    .filter(entry=>entry.title.toLocaleLowerCase().includes(query)||(entry.photo?.name||'').toLocaleLowerCase().includes(query))
     .filter(entry=>group==='all'||(group==='unlinked'?!entry.scheduleIds.length:group==='date'?(selected==='all'||((entry.date||'').slice(0,7)||'날짜 미입력')===selected):(entry.scheduleIds.length>0&&(selected==='all'||entry.scheduleTitle===selected))));
   const mode=gallerySort.value;
   entries.sort((a,b)=>mode==='name'?a.title.localeCompare(b.title,'ko'):mode==='old'?(a.date||'9999').localeCompare(b.date||'9999'):(b.date||'').localeCompare(a.date||''));
-  gallerySummary.textContent='현재 '+entries.length+'장 표시'+(galleryHasMore?' · 더 불러올 사진이 있어':'');
+  gallerySummary.textContent='현재 '+entries.length+'개 PHOTO 게시글 표시'+(galleryHasMore?' · 더 불러올 수 있어':'');
   gallery.replaceChildren();
-  if(!entries.length){const empty=document.createElement('div');empty.className='gallery-empty';empty.textContent=galleryItems.length?'조건에 맞는 사진이 없어.':'♡ 노션 사진을 불러와 줘';gallery.append(empty);return;}
+  const newCard=document.createElement('button');newCard.type='button';newCard.className='new-photo-card';newCard.innerHTML='<span class="plus">＋</span><span>새 게시글</span>';newCard.onclick=()=>selectTarget(null,'');gallery.append(newCard);
+  if(!entries.length){const empty=document.createElement('div');empty.className='gallery-empty';empty.textContent=galleryItems.length?'조건에 맞는 게시글이 없어.':'♡ 노션 PHOTO 목록을 불러와 줘';gallery.append(empty);return;}
   for(const entry of entries){
-    const card=document.createElement('button');card.type='button';card.className='gallery-card';
-    const img=document.createElement('img');img.src=entry.photo.url;img.alt=entry.title;img.loading='lazy';img.referrerPolicy='no-referrer';
+    const card=document.createElement('button');card.type='button';card.className='gallery-card';if(targetPageId===entry.id)card.classList.add('upload-target');
+    if(entry.photo){const img=document.createElement('img');img.src=entry.photo.url;img.alt=entry.title;img.loading='lazy';img.referrerPolicy='no-referrer';card.append(img);}else{const placeholder=document.createElement('div');placeholder.style.cssText='aspect-ratio:3/4;display:grid;place-items:center;background:#eef7fc;color:#9ab2c3';placeholder.textContent='사진 없음';card.append(placeholder);}
     const title=document.createElement('span');title.className='gtitle';title.textContent=entry.title;
     const date=document.createElement('span');date.className='gdate';date.textContent=(entry.date||'촬영일 미입력')+(entry.scheduleTitle?' · '+entry.scheduleTitle:'');
-    card.append(img,title,date);
-    card.onclick=()=>{lightboxImage.src=entry.photo.url;lightboxImage.alt=entry.title;lightboxCaption.textContent=entry.title+(entry.date?' · '+entry.date:'');lightbox.hidden=false;};
-    gallery.append(card);
+    card.append(title,date);card.onclick=()=>selectTarget(entry.id,entry.title);gallery.append(card);
   }
 }
 galleryGroup.addEventListener('change',()=>{galleryFilter.value='all';renderGallery();});
@@ -192,7 +193,7 @@ async function fetchGallery(reset=false){
     for(const item of data.items){if(!seen.has(item.id)){galleryItems.push(item);seen.add(item.id);}}
     galleryCursor=data.nextCursor||null;galleryHasMore=Boolean(data.hasMore&&galleryCursor);
     loadMore.hidden=!galleryHasMore;
-    renderGallery();updateTargetPages();
+    renderGallery();
     notionStatus.textContent='♡ '+galleryItems.length+'개 항목 · '+galleryItems.reduce((n,x)=>n+(x.photos||[]).length,0)+'장 표시'+(galleryHasMore?' · 더 불러올 수 있어':'');
   }catch(error){notionStatus.className='notion-status error';notionStatus.textContent='불러오기 실패: '+error.message+' · 다시 시도해 줘.';}
   finally{galleryBusy=false;notionButton.disabled=false;loadMore.disabled=false;}
@@ -200,119 +201,39 @@ async function fetchGallery(reset=false){
 notionButton.addEventListener('click',()=>fetchGallery(true));
 loadMore.addEventListener('click',()=>fetchGallery(false));
 
-const uploadChoice=document.getElementById('upload-choice');
-const uploadButton=document.getElementById('upload-one');
-const uploadStatus=document.getElementById('upload-status');
 let uploading=false;
-const batchButton=document.getElementById('upload-batch');
-const batchStatus=document.getElementById('batch-status');
-const batchResults=document.getElementById('batch-results');
+const savedPhotoIds=new Set(),uncertainPhotoIds=new Set();
+let targetPageId=null, targetTitle='';
+const uploadStatus=document.getElementById('upload-status');
+const uploadForm=document.getElementById('upload-form');
+const coverPhoto=document.getElementById('cover-photo');
+const uploadTargetLabel=document.getElementById('upload-target-label');
 const batchProgress=document.getElementById('batch-progress');
-const savedPhotoIds=new Set();
-const uncertainPhotoIds=new Set();
-function setBusy(value){uploading=value;['upload-mode','target-page','all-targets','new-target'].forEach(id=>document.getElementById(id).disabled=value);document.getElementById('photo-title').disabled=value||!!newPhotoPageId;document.getElementById('photo-date').disabled=value||!!newPhotoPageId;uploadButton.disabled=value;batchButton.disabled=value;document.getElementById('pick').disabled=value;document.getElementById('clear').disabled=value;document.querySelectorAll('[data-mode]').forEach(b=>b.disabled=value);document.getElementById('cols').disabled=value;}
-async function uploadFile(p){
- const form=new FormData();form.append('file',p.file,p.file.name);
- const mode=document.getElementById('upload-mode').value;
- if(mode==='existing'){
-  const id=document.getElementById('target-page').value;
-  if(!id)throw new Error('저장할 기존 PHOTO를 선택해 줘.');
-  form.append('pageId',id);
- }else if(mode==='new'){
-  if(newPhotoPageId)form.append('pageId',newPhotoPageId);
-  else{
-   const title=document.getElementById('photo-title').value.trim(),date=document.getElementById('photo-date').value;
-   if(!title||!date)throw new Error('새 PHOTO의 제목과 촬영일을 입력해 줘.');
-   form.append('title',title);form.append('date',date);
-  }
- }
- const response=await fetch(API_URL+'/upload',{method:'POST',headers:{Authorization:'Bearer '+sessionToken},body:form});
- const result=await response.clone().json().catch(()=>({}));
- if(response.ok&&result.success&&mode==='new'){
-  newPhotoPageId=result.pageId;document.getElementById('target-status').textContent='♡ '+result.title+' · 다음 사진도 같은 PHOTO에 추가돼';
-  document.getElementById('photo-title').disabled=true;document.getElementById('photo-date').disabled=true;
- }
- return response;
+function setBusy(value){uploading=value;document.getElementById('upload-layout').disabled=value;document.getElementById('pick').disabled=value;document.getElementById('clear').disabled=value;document.querySelectorAll('[data-mode]').forEach(b=>b.disabled=value);document.getElementById('cols').disabled=value;}
+function selectTarget(id,title){targetPageId=id||null;targetTitle=title||'';uploadForm.hidden=false;uploadTargetLabel.textContent=id?'♡ 기존 PHOTO에 추가 · '+title:'♡ 새 PHOTO 게시글 만들기';document.getElementById('new-photo-title').hidden=Boolean(id);document.getElementById('new-photo-date').hidden=Boolean(id);document.getElementById('upload-title-label').hidden=Boolean(id);document.getElementById('upload-date-label').hidden=Boolean(id);uploadStatus.textContent='미리보기 사진 '+photos.length+'장을 저장할 수 있어.';renderGallery();uploadForm.scrollIntoView({behavior:'smooth',block:'nearest'});}
+function updateUploadChoices(){const current=coverPhoto.value;coverPhoto.replaceChildren();photos.forEach((p,i)=>coverPhoto.add(new Option((i+1)+' · '+p.name,String(i))));if([...coverPhoto.options].some(x=>x.value===current))coverPhoto.value=current;}
+function previewRows(){const cols=Number(document.getElementById('cols').value)||3;const rows=[];let row=[];photos.forEach((p,i)=>{if((p.breakBefore||row.length>=cols)&&row.length){rows.push(row);row=[];}row.push(i);});if(row.length)rows.push(row);return rows;}
+async function uploadLayout(){
+ if(uploading)return;
+ if(!sessionToken||Date.now()>=sessionExpiresAt){uploadStatus.textContent='먼저 로그인해 줘.';return;}
+ if(!photos.length){uploadStatus.textContent='사진을 먼저 불러와 줘.';return;}
+ if(photos.length>15){uploadStatus.textContent='한 번에 최대 15장까지 업로드할 수 있어.';return;}
+ if(photos.some(p=>!p.file||!['image/jpeg','image/png','image/webp','image/gif'].includes(p.file.type)||p.file.size>10*1024*1024)){uploadStatus.textContent='JPEG/PNG/WebP/GIF · 사진당 10MB 이하만 가능해.';return;}
+ if(photos.some(p=>savedPhotoIds.has(p.id)||uncertainPhotoIds.has(p.id))){uploadStatus.textContent='이미 업로드했거나 결과 확인이 필요한 사진이 있어. 사진 목록을 새로 구성해 줘.';return;}
+ const title=document.getElementById('new-photo-title').value.trim(),date=document.getElementById('new-photo-date').value;
+ if(!targetPageId&&(!title||!date)){uploadStatus.textContent='제목과 촬영일을 입력해 줘.';return;}
+ if(!confirm(targetPageId?'기존 PHOTO 「'+targetTitle+'」 본문에 '+photos.length+'장을 추가할까?':'PHOTO 「'+title+'」 게시글 1개를 만들고 '+photos.length+'장을 저장할까?'))return;
+ const form=new FormData();photos.forEach(p=>form.append('files',p.file,p.file.name));form.append('rows',JSON.stringify(previewRows()));form.append('coverIndex',coverPhoto.value||'0');if(targetPageId)form.append('pageId',targetPageId);else{form.append('title',title);form.append('date',date);}
+ setBusy(true);batchProgress.hidden=false;batchProgress.value=0;uploadStatus.className='upload-status';uploadStatus.textContent='♡ 노션에 사진과 행·열 배치를 저장하는 중…';
+ try{const r=await fetch(API_URL+'/upload-layout',{method:'POST',headers:{Authorization:'Bearer '+sessionToken},body:form});const result=await r.json();if(r.status===401){disconnect('로그인이 만료됐어.');throw new Error('로그인 만료');}if(!r.ok||!result.success)throw new Error(result.error||'업로드 실패 (HTTP '+r.status+')');photos.forEach(p=>savedPhotoIds.add(p.id));batchProgress.value=1;uploadStatus.className='upload-status ok';uploadStatus.textContent='♡ '+result.uploaded+'장 저장 완료 · '+result.title;await fetchGallery(true);await fetchSchedules();}
+ catch(e){photos.forEach(p=>uncertainPhotoIds.add(p.id));uploadStatus.className='upload-status error';uploadStatus.textContent='저장 결과 확인 필요: '+e.message+' · 재시도 전에 노션을 확인해 줘.';}
+ finally{setBusy(false);}
 }
-let newPhotoPageId=null;
-function updateTargetPages(){const s=document.getElementById('target-page'),id=s.value;s.replaceChildren(new Option('저장할 PHOTO 선택',''));for(const p of galleryItems)s.add(new Option(p.title+' · '+(p.date||'촬영일 없음'),p.id));if(galleryItems.some(p=>p.id===id))s.value=id;}
-document.getElementById('upload-mode').onchange=()=>{const m=document.getElementById('upload-mode').value;document.getElementById('existing-fields').hidden=m!=='existing';document.getElementById('new-fields').hidden=m!=='new';};
-document.getElementById('new-target').onclick=()=>{newPhotoPageId=null;document.getElementById('photo-title').disabled=false;document.getElementById('photo-date').disabled=false;document.getElementById('target-status').textContent='다음 업로드의 첫 사진으로 새 PHOTO를 만들게.';};
-document.getElementById('all-targets').onclick=async()=>{await fetchGallery(true);while(galleryHasMore&&!galleryBusy){const before=galleryCursor;await fetchGallery(false);if(before===galleryCursor)break;}};
-function targetLabel(){const m=document.getElementById('upload-mode').value;return m==='existing'?'선택한 기존 PHOTO에 추가':m==='new'?'제목·촬영일의 PHOTO 하나에 저장':'사진마다 새 PHOTO로 저장';}
-function validateTarget(){const m=document.getElementById('upload-mode').value;if(m==='existing'&&!document.getElementById('target-page').value)return '기존 PHOTO를 선택해 줘.';if(m==='new'&&!newPhotoPageId&&(!document.getElementById('photo-title').value.trim()||!document.getElementById('photo-date').value))return '제목과 촬영일을 입력해 줘.';return '';}
-function validFile(p){return p.file&&['image/jpeg','image/png','image/webp','image/gif'].includes(p.file.type)&&p.file.size>0&&p.file.size<=10*1024*1024;}
-
-function updateUploadChoices(){
-  const selected=uploadChoice.value;
-  uploadChoice.replaceChildren();
-  if(!photos.length){const o=new Option('먼저 사진을 불러와 줘','');uploadChoice.add(o);return;}
-  for(const p of photos){uploadChoice.add(new Option(p.name,p.id));}
-  if(photos.some(p=>p.id===selected))uploadChoice.value=selected;
-}
-async function uploadOnePhoto(){
-  if(uploading)return;
-  const p=photos.find(item=>item.id===uploadChoice.value);
-  if(!p){uploadStatus.className='upload-status error';uploadStatus.textContent='먼저 업로드할 사진을 선택해 줘.';return;}
-  if(!sessionToken || Date.now()>=sessionExpiresAt){uploadStatus.className='upload-status error';uploadStatus.textContent='먼저 로그인해 줘.';return;}
-  if(!validFile(p)){uploadStatus.className='upload-status error';uploadStatus.textContent='JPEG · PNG · WebP · GIF 형식의 10MB 이하 사진만 가능해.';return;}
-  if(savedPhotoIds.has(p.id)){uploadStatus.textContent='이미 저장한 사진이야. 중복 업로드하지 않았어.';return;}
-  if(uncertainPhotoIds.has(p.id)){uploadStatus.textContent='이 사진은 저장 결과가 불확실해. 노션에서 먼저 확인해 줘.';return;}
-  const targetError=validateTarget();if(targetError){uploadStatus.textContent=targetError;return;}
-  if(!confirm(p.name+' · '+targetLabel()+'할까?'))return;
-  setBusy(true);
-  uploadStatus.className='upload-status';uploadStatus.textContent='♡ 사진 1장 업로드 중…';
-  try{
-    const response=await uploadFile(p);
-    let result={};try{result=await response.json();}catch{}
-    if(response.status===401){disconnect('♡ 인증이 만료됐어 · 다시 연결해 줘.');throw new Error('로그인 시간이 만료됐어.');}
-    if(!response.ok || result.success!==true)throw new Error((result.error||result.message||'서버 오류')+' (HTTP '+response.status+')');
-    savedPhotoIds.add(p.id);uploadStatus.className='upload-status ok';uploadStatus.textContent='♡ '+(result.title||p.name)+' · 선택한 방식으로 저장됐어! 목록 버튼을 눌러 확인해 줘.';
-  }catch(error){uncertainPhotoIds.add(p.id);uploadStatus.className='upload-status error';uploadStatus.textContent='업로드를 완료하지 못했어: '+error.message+' · 결과가 불확실하면 재시도 전 노션 목록을 확인해 줘.';}
-  finally{setBusy(false);}
-}
-async function uploadBatch(){
-  if(uploading)return;
-  if(!sessionToken||Date.now()>=sessionExpiresAt){batchStatus.className='upload-status error';batchStatus.textContent='먼저 로그인해 줘.';return;}
-  const pending=photos.filter(p=>!savedPhotoIds.has(p.id));
-  if(!pending.length){batchStatus.textContent='새로 저장할 사진이 없어.';return;}
-  if(pending.some(p=>uncertainPhotoIds.has(p.id))){batchStatus.className='upload-status error';batchStatus.textContent='저장 결과가 불확실한 사진이 있어. 노션 목록을 확인한 후 새로 불러와 줘.';return;}
-  const invalid=pending.find(p=>!validFile(p));
-  if(invalid){batchStatus.className='upload-status error';batchStatus.textContent='지원하지 않거나 10MB를 초과하는 사진: '+invalid.name;return;}
-  const targetError=validateTarget();if(targetError){batchStatus.textContent=targetError;return;}
-  if(!confirm('미리보기 순서대로 '+pending.length+'장 · '+targetLabel()+'할까?'))return;
-  setBusy(true);
-  batchProgress.hidden=false;batchProgress.max=pending.length;batchProgress.value=0;
-  batchResults.textContent='';batchStatus.className='upload-status';
-  let done=0;
-  for(const p of pending){
-    batchStatus.textContent='♡ '+(done+1)+'/'+pending.length+'장 업로드 중 · '+p.name;
-    try{
-      const response=await uploadFile(p);
-      let result={};try{result=await response.json();}catch{}
-      if(response.status===401){disconnect('♡ 인증이 만료됐어 · 다시 연결해 줘.');throw new Error('로그인 만료');}
-      if(!response.ok||result.success!==true)throw new Error((result.error||result.message||'서버 오류')+' (HTTP '+response.status+')');
-      savedPhotoIds.add(p.id);
-      batchResults.textContent+='✓ '+p.name+' · 성공\n';
-      done++;batchProgress.value=done;
-    }catch(error){
-      uncertainPhotoIds.add(p.id);
-      batchResults.textContent+='! '+p.name+' · 확인 필요: '+error.message+'\n';
-      batchStatus.className='upload-status error';
-      batchStatus.textContent='업로드 중단 · '+done+'/'+pending.length+'장 성공. 결과가 불확실한 사진은 노션에서 확인하고 재시도해 줘.';
-      setBusy(false);return;
-    }
-  }
-  batchStatus.className='upload-status ok';
-  batchStatus.textContent='♡ '+done+'/'+pending.length+'장 저장 완료! 노션 PHOTO 목록에서 확인해 줘.';
-  setBusy(false);
-}
-batchButton.addEventListener('click',uploadBatch);
-uploadButton.addEventListener('click',uploadOnePhoto);
-const photos=[];let mode='portrait';const grid=document.querySelector('#grid');const count=document.querySelector('#count');const fileInput=document.querySelector('#files');document.querySelector('#pick').onclick=()=>fileInput.click();document.querySelector('#clear').onclick=()=>{photos.forEach(p=>URL.revokeObjectURL(p.url));photos.length=0;savedPhotoIds.clear();uncertainPhotoIds.clear();batchProgress.hidden=true;batchResults.textContent='';batchStatus.textContent='사진을 불러오면 일괄 업로드할 수 있어.';render();updateUploadChoices()};document.querySelector('#cols').onchange=e=>grid.style.setProperty('--cols',e.target.value);document.querySelectorAll('[data-mode]').forEach(b=>b.onclick=()=>{mode=b.dataset.mode;document.querySelectorAll('[data-mode]').forEach(x=>x.classList.toggle('active',x===b));if(mode!=='free')sort();render();updateUploadChoices()});
+document.getElementById('upload-layout').onclick=uploadLayout;
+const photos=[];let mode='portrait';const grid=document.querySelector('#grid');const count=document.querySelector('#count');const fileInput=document.querySelector('#files');document.querySelector('#pick').onclick=()=>fileInput.click();document.querySelector('#clear').onclick=()=>{photos.forEach(p=>URL.revokeObjectURL(p.url));photos.length=0;savedPhotoIds.clear();uncertainPhotoIds.clear();batchProgress.hidden=true;uploadStatus.textContent='사진을 불러오면 업로드할 수 있어.';render();updateUploadChoices()};document.querySelector('#cols').onchange=e=>grid.style.setProperty('--cols',e.target.value);document.querySelectorAll('[data-mode]').forEach(b=>b.onclick=()=>{mode=b.dataset.mode;document.querySelectorAll('[data-mode]').forEach(x=>x.classList.toggle('active',x===b));if(mode!=='free')sort();render();updateUploadChoices()});
 fileInput.onchange=async e=>{const incoming=[...e.target.files];for(const file of incoming){if(!file.type.startsWith('image/'))continue;const url=URL.createObjectURL(file);const dims=await new Promise(resolve=>{const img=new Image();img.onload=()=>resolve([img.naturalWidth,img.naturalHeight]);img.onerror=()=>resolve([0,0]);img.src=url});if(!dims[0]){URL.revokeObjectURL(url);continue}photos.push({id:crypto.randomUUID?crypto.randomUUID():String(Date.now()+Math.random()),url,w:dims[0],h:dims[1],name:file.name,file})}if(mode!=='free')sort();render();updateUploadChoices();fileInput.value=''};
 function sort(){photos.sort((a,b)=>{const group=p=>p.w>p.h?'landscape':'portrait';const ga=group(a),gb=group(b);if(ga!==gb)return (ga===(mode==='portrait'?'portrait':'landscape'))?-1:1;return (a.w/a.h)-(b.w/b.h)})}
-function render(){count.textContent=`사진 ${photos.length}장 · 세로 ${photos.filter(p=>p.w<=p.h).length}장 · 가로 ${photos.filter(p=>p.w>p.h).length}장`;grid.replaceChildren();if(!photos.length){const el=document.createElement('div');el.className='empty';el.textContent='♡ 사진을 추가하면 여기에 표시돼';grid.append(el);return}photos.forEach((p,i)=>{const el=document.createElement('div');el.className='tile '+(p.w>p.h?'land':'');el.dataset.id=p.id;const img=document.createElement('img');img.src=p.url;img.loading='lazy';const num=document.createElement('span');num.className='num';num.textContent=i+1;el.append(img,num);grid.append(el);attachDrag(el)})}
+function render(){count.textContent=`사진 ${photos.length}장 · 세로 ${photos.filter(p=>p.w<=p.h).length}장 · 가로 ${photos.filter(p=>p.w>p.h).length}장`;grid.replaceChildren();if(!photos.length){const el=document.createElement('div');el.className='empty';el.textContent='♡ 사진을 추가하면 여기에 표시돼';grid.append(el);return;}for(const rowIds of previewRows()){const row=document.createElement('div');row.className='preview-row';row.style.setProperty('--cols',document.getElementById('cols').value);for(const i of rowIds){const p=photos[i];const unit=document.createElement('div');unit.className='preview-unit';const el=document.createElement('div');el.className='tile '+(p.w>p.h?'land':'');el.dataset.id=p.id;const img=document.createElement('img');img.src=p.url;img.loading='lazy';const num=document.createElement('span');num.className='num';num.textContent=i+1;el.append(img,num);const br=document.createElement('button');br.type='button';br.className='break-btn'+(photos[i+1]?.breakBefore?' active':'');br.textContent=photos[i+1]?.breakBefore?'↵ 줄바꿈 해제':'↵ 여기서 줄바꿈';br.disabled=i===photos.length-1;br.onclick=()=>{if(photos[i+1])photos[i+1].breakBefore=!photos[i+1].breakBefore;render();};unit.append(el,br);row.append(unit);attachDrag(el);}grid.append(row);}}
 let drag=null;function attachDrag(el){el.addEventListener('pointerdown',e=>{if(mode!=='free')return;drag={id:el.dataset.id,from:el,px:e.clientX,py:e.clientY,moved:false};el.setPointerCapture(e.pointerId)});el.addEventListener('pointermove',e=>{if(!drag||drag.from!==el)return;if(Math.hypot(e.clientX-drag.px,e.clientY-drag.py)>10)drag.moved=true;if(!drag.moved)return;el.classList.add('dragging');document.querySelectorAll('.tile').forEach(x=>x.classList.remove('target'));const target=document.elementFromPoint(e.clientX,e.clientY)?.closest('.tile');if(target&&target!==el)target.classList.add('target')});el.addEventListener('pointerup',e=>{if(!drag||drag.from!==el)return;const target=document.elementFromPoint(e.clientX,e.clientY)?.closest('.tile');if(drag.moved&&target&&target!==el){const from=photos.findIndex(p=>p.id===drag.id),to=photos.findIndex(p=>p.id===target.dataset.id);if(from>=0&&to>=0){const [item]=photos.splice(from,1);photos.splice(to,0,item)}}drag=null;render();updateUploadChoices()});el.addEventListener('pointercancel',()=>{drag=null;render();updateUploadChoices()})}
 
 // V1.9: SCHEDULE calendar. The Worker must provide POST /schedules.
@@ -330,17 +251,16 @@ function closeCalendarDialog(){calDialog.hidden=true;calDialogLinks.replaceChild
 document.getElementById('cal-dialog-close').onclick=closeCalendarDialog;
 calDialog.addEventListener('click',e=>{if(e.target===calDialog)closeCalendarDialog()});
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeCalendarDialog()});
+function notionLink(url,id){const safe=safeNotionUrl(url);if(safe)return safe;const clean=String(id||'').replace(/-/g,'');return /^[0-9a-f]{32}$/i.test(clean)?'https://www.notion.so/'+clean:null;}
 function openSchedule(item){
- const linked=Array.isArray(item.photos)?item.photos.filter(p=>safeNotionUrl(p.url)):[];
- if(linked.length===1){window.open(safeNotionUrl(linked[0].url),'_blank','noopener,noreferrer');return}
- if(linked.length>1){
-  document.getElementById('cal-dialog-title').textContent=item.title+' · PHOTO 선택';
-  calDialogLinks.replaceChildren();
-  for(const p of linked){const a=document.createElement('a');a.className='cal-photo-link';a.href=safeNotionUrl(p.url);a.target='_blank';a.rel='noopener noreferrer';a.textContent='📸 '+(p.title||'PHOTO 열기');calDialogLinks.append(a)}
-  calDialog.hidden=false;return;
- }
- const url=safeNotionUrl(item.notionUrl);if(url)window.open(url,'_blank','noopener,noreferrer');
+ const linked=Array.isArray(item.photos)?item.photos:[];
+ const usable=linked.map(p=>({...p,href:notionLink(p.url,p.id)})).filter(p=>p.href);
+ if(usable.length===1){location.assign(usable[0].href);return;}
+ if(usable.length>1){document.getElementById('cal-dialog-title').textContent=item.title+' · PHOTO 선택';calDialogLinks.replaceChildren();for(const p of usable){const a=document.createElement('a');a.className='cal-photo-link';a.href=p.href;a.textContent='📸 '+(p.title||'PHOTO 열기');calDialogLinks.append(a);}calDialog.hidden=false;return;}
+ const url=notionLink(item.notionUrl,item.id);if(url){location.assign(url);return;}
+ scheduleStatus.className='notion-status error';scheduleStatus.textContent='이 일정의 노션 주소를 확인할 수 없어. 캘린더를 다시 불러와 줘.';
 }
+
 function renderCalendar(){
  const year=calendarDate.getFullYear(),month=calendarDate.getMonth();
  calMonth.textContent=year+'년 '+(month+1)+'월';calDays.replaceChildren();
@@ -355,8 +275,8 @@ function renderCalendar(){
   const num=document.createElement('div');num.className='cal-num';num.textContent=day;box.append(num);
   const date=year+'-'+String(month+1).padStart(2,'0')+'-'+String(day).padStart(2,'0');
   const items=byDate.get(date)||[];
-  for(const item of items.slice(0,3)){const b=document.createElement('button');b.type='button';b.className='cal-event'+(item.hasPhoto?' has-photo':'');b.textContent=item.title||'일정';b.title=(item.title||'일정')+(item.hasPhoto?' · PHOTO 열기':' · SCHEDULE 열기');b.onclick=()=>openSchedule(item);box.append(b)}
-  if(items.length>3){const more=document.createElement('button');more.type='button';more.className='cal-event';more.textContent='+'+(items.length-3)+'개 더보기';more.onclick=()=>{const hidden=box.querySelector('.cal-expanded');if(hidden){hidden.remove();more.textContent='+'+(items.length-3)+'개 더보기';return}const wrap=document.createElement('div');wrap.className='cal-expanded';for(const item of items.slice(3)){const b=document.createElement('button');b.type='button';b.className='cal-event'+(item.hasPhoto?' has-photo':'');b.textContent=item.title;b.onclick=()=>openSchedule(item);wrap.append(b)}box.append(wrap);more.textContent='접기'};box.append(more)}
+  for(const item of items.slice(0,3)){const b=document.createElement('button');b.type='button';b.className='cal-event'+((item.hasPhoto||item.photos?.length)?' has-photo':'');b.textContent=item.title||'일정';b.title=(item.title||'일정')+((item.hasPhoto||item.photos?.length)?' · PHOTO 열기':' · SCHEDULE 열기');b.onclick=()=>openSchedule(item);box.append(b)}
+  if(items.length>3){const more=document.createElement('button');more.type='button';more.className='cal-event';more.textContent='+'+(items.length-3)+'개 더보기';more.onclick=()=>{const hidden=box.querySelector('.cal-expanded');if(hidden){hidden.remove();more.textContent='+'+(items.length-3)+'개 더보기';return}const wrap=document.createElement('div');wrap.className='cal-expanded';for(const item of items.slice(3)){const b=document.createElement('button');b.type='button';b.className='cal-event'+((item.hasPhoto||item.photos?.length)?' has-photo':'');b.textContent=item.title;b.onclick=()=>openSchedule(item);wrap.append(b)}box.append(wrap);more.textContent='접기'};box.append(more)}
   calDays.append(box);
  }
 }
@@ -378,4 +298,3 @@ renderCalendar();
 
 if('serviceWorker'in navigator&&location.protocol.startsWith('http'))navigator.serviceWorker.register('./sw.js').catch(()=>{});
 </script></body></html>
-

@@ -1,8 +1,9 @@
 <!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#dbeef8"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="PHOTO ARCHIVE"><link rel="manifest" href="manifest.webmanifest"><title>TAEMIN PHOTO ARCHIVE ♡</title><style>
 :root{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;color:#405b70;background:#f6fbff}*{box-sizing:border-box}body{margin:0}header{text-align:center;padding:28px 16px 16px;background:linear-gradient(#e1f2fc,#fff)}h1{font-size:21px;letter-spacing:1px;margin:8px 0}small{letter-spacing:2px;color:#7894a9}.shell{max-width:860px;margin:auto;padding:14px 14px 100px}.card{background:#fff;border:1px solid #dcebf4;border-radius:20px;padding:17px;margin:12px 0;box-shadow:0 5px 18px #a2c7df18}.label{font-size:12px;letter-spacing:1.6px;font-weight:700;color:#8ca7bb;margin-bottom:12px}.row{display:flex;gap:8px;flex-wrap:wrap}.btn{border:1px solid #cbdfea;background:#f5faff;color:#53748b;border-radius:12px;padding:12px 13px;font-weight:700;cursor:pointer;flex:1;min-width:110px}.btn.active,.primary{background:#b8dff4;border-color:#a4d1e9;color:#234c65}.btn:disabled{opacity:.45}.stat{font-size:13px;color:#7894a9;margin-top:12px}.grid{display:grid;grid-template-columns:repeat(var(--cols,3),minmax(0,1fr));gap:8px;align-items:start;min-height:140px}.tile{position:relative;border:2px solid transparent;border-radius:12px;background:#f0f7fb;overflow:hidden;touch-action:none;user-select:none;aspect-ratio:3/4}.tile.land{aspect-ratio:4/3}.tile img{width:100%;height:100%;object-fit:cover;pointer-events:none}.tile .num{position:absolute;top:5px;left:5px;background:#ffffffd9;border-radius:20px;font-size:10px;padding:3px 6px}.tile.dragging{opacity:.35}.tile.target{border-color:#579bc3}.empty{display:grid;place-items:center;min-height:140px;text-align:center;color:#91aaba;line-height:1.8}.setting{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:12px;font-size:13px}select{border:1px solid #cbdfea;border-radius:9px;padding:8px;color:#496b81;background:white}.footer{position:fixed;bottom:0;left:0;right:0;background:#ffffffed;backdrop-filter:blur(10px);border-top:1px solid #d9eaf4;padding:12px max(16px,env(safe-area-inset-left)) calc(12px + env(safe-area-inset-bottom));text-align:center}.footer button{width:min(100%,830px)}.notice{font-size:12px;line-height:1.7;color:#7894a9}input[type=file]{display:none}
 .login-field{width:100%;border:1px solid #cbdfea;border-radius:12px;padding:13px;font-size:16px;color:#405b70;background:#fff}.login-status{min-height:22px;font-size:13px;margin-top:10px}.login-status.error{color:#a54455}.login-status.ok{color:#36785b}.login-card{border-color:#c7e2f2}.login-card .row{margin-top:10px}.locked-note{font-size:12px;color:#7894a9}
+.notion-items{display:grid;gap:8px;margin-top:12px}.notion-item{padding:12px;border:1px solid #dcebf4;border-radius:12px;background:#f7fbff}.notion-item-title{font-size:14px;font-weight:700;overflow-wrap:anywhere}.notion-item-meta{font-size:12px;color:#7894a9;margin-top:5px}.notion-status{font-size:13px;margin-top:10px;color:#7894a9;line-height:1.6}.notion-status.error{color:#a54455}
 </style></head><body>
-<header><small>† OUR LITTLE HEAVEN †</small><h1>♡ PHOTO ARCHIVE ♡</h1><small>iOS PREVIEW · V1.2</small></header><main class="shell"><section class="card login-card"><div class="label">00 · PRIVATE ACCESS</div><p class="notice">♡ OUR LITTLE HEAVEN 전용 비밀번호를 입력해 줘. 비밀번호는 기기에 저장하지 않아.</p><form id="login-form"><label for="archive-password" class="notice">ARCHIVE PASSWORD</label><input class="login-field" id="archive-password" type="password" autocomplete="off" required placeholder="비밀번호 입력"><div class="row"><button class="btn primary" id="login-btn" type="submit">♡ CONNECT</button><button class="btn" id="logout-btn" type="button" hidden>연결 해제</button></div><div class="login-status" id="login-status" role="status" aria-live="polite">연결 전 · 사진 선택과 정렬은 로그인 없이도 가능해.</div></form></section><section class="card"><div class="label">01 · ADD PHOTOS</div><div class="row"><button class="btn primary" id="pick">＋ 사진 불러오기</button><button class="btn" id="clear">전체 비우기</button></div><input type="file" id="files" accept="image/*" multiple><div class="stat" id="count">사진 0장</div></section><section class="card"><div class="label">02 · PHOTO ORDER</div><div class="row"><button class="btn active" data-mode="portrait">세로 먼저</button><button class="btn" data-mode="landscape">가로 먼저</button><button class="btn" data-mode="free">자유 배치</button></div><div class="setting"><label for="cols">미리보기 한 줄 사진 수</label><select id="cols"><option>2</option><option selected>3</option><option>4</option><option>5</option></select></div><p class="notice">자유 배치에서는 사진을 길게 누른 채 다른 사진 위로 끌어 순서를 바꿀 수 있어.</p></section><section class="card"><div class="label">03 · PHOTO PREVIEW</div><div id="grid" class="grid" style="--cols:3"><div class="empty">♡ 사진을 추가하면 여기에 표시돼</div></div></section><section class="card"><div class="label">04 · NOTION CONNECTION</div><p class="notice">비밀번호 확인 기능을 연결한 테스트 버전이야. <b>노션 사진 업로드·공동 동기화는 아직 지원하지 않아.</b> 로그인 시 1시간 유효 인증 토큰을 발급받고 서버에서 검증해. 실제 사진 업로드 기능에는 별도의 서버 측 인증 검사를 추가할 예정이야.</p></section></main><div class="footer"><button class="btn primary" disabled>♡ NOTION UPLOAD · 준비 중</button></div>
+<header><small>† OUR LITTLE HEAVEN †</small><h1>♡ PHOTO ARCHIVE ♡</h1><small>iOS PREVIEW · V1.3</small></header><main class="shell"><section class="card login-card"><div class="label">00 · PRIVATE ACCESS</div><p class="notice">♡ OUR LITTLE HEAVEN 전용 비밀번호를 입력해 줘. 비밀번호는 기기에 저장하지 않아.</p><form id="login-form"><label for="archive-password" class="notice">ARCHIVE PASSWORD</label><input class="login-field" id="archive-password" type="password" autocomplete="off" required placeholder="비밀번호 입력"><div class="row"><button class="btn primary" id="login-btn" type="submit">♡ CONNECT</button><button class="btn" id="logout-btn" type="button" hidden>연결 해제</button></div><div class="login-status" id="login-status" role="status" aria-live="polite">연결 전 · 사진 선택과 정렬은 로그인 없이도 가능해.</div></form></section><section class="card"><div class="label">01 · ADD PHOTOS</div><div class="row"><button class="btn primary" id="pick">＋ 사진 불러오기</button><button class="btn" id="clear">전체 비우기</button></div><input type="file" id="files" accept="image/*" multiple><div class="stat" id="count">사진 0장</div></section><section class="card"><div class="label">02 · PHOTO ORDER</div><div class="row"><button class="btn active" data-mode="portrait">세로 먼저</button><button class="btn" data-mode="landscape">가로 먼저</button><button class="btn" data-mode="free">자유 배치</button></div><div class="setting"><label for="cols">미리보기 한 줄 사진 수</label><select id="cols"><option>2</option><option selected>3</option><option>4</option><option>5</option></select></div><p class="notice">자유 배치에서는 사진을 길게 누른 채 다른 사진 위로 끌어 순서를 바꿀 수 있어.</p></section><section class="card"><div class="label">03 · PHOTO PREVIEW</div><div id="grid" class="grid" style="--cols:3"><div class="empty">♡ 사진을 추가하면 여기에 표시돼</div></div></section><section class="card"><div class="label">04 · NOTION CONNECTION</div><p class="notice">비밀번호 확인 기능을 연결한 테스트 버전이야. <b>노션 사진 업로드·공동 동기화는 아직 지원하지 않아.</b> 로그인 시 1시간 유효 인증 토큰을 발급받고 서버에서 검증해. 실제 사진 업로드 기능에는 별도의 서버 측 인증 검사를 추가할 예정이야.</p><button class="btn primary" id="load-notion" type="button">♡ 노션 PHOTO 목록 불러오기</button><div class="notion-status" id="notion-status" role="status" aria-live="polite">로그인한 다음 목록을 불러올 수 있어.</div><div class="notion-items" id="notion-items"></div></section></main><div class="footer"><button class="btn primary" disabled>♡ NOTION UPLOAD · 준비 중</button></div>
 <script>
 const API_URL='https://taemin-photo-api.ourlittleheaven.workers.dev';
 const loginForm=document.getElementById('login-form');
@@ -16,6 +17,8 @@ let sessionTimer = null;
 
 function disconnect(message = '연결 전 · 사진 선택과 정렬은 로그인 없이도 가능해.') {
   sessionToken = null;
+  document.getElementById('notion-items').replaceChildren();
+  document.getElementById('notion-status').textContent = '로그인한 다음 목록을 불러올 수 있어.';
   sessionExpiresAt = 0;
   if (sessionTimer) clearTimeout(sessionTimer);
   sessionTimer = null;
@@ -95,6 +98,55 @@ loginForm.addEventListener('submit', async (event) => {
 });
 
 logoutButton.addEventListener('click', () => disconnect());
+
+const notionButton = document.getElementById('load-notion');
+const notionStatus = document.getElementById('notion-status');
+const notionItems = document.getElementById('notion-items');
+notionButton.addEventListener('click', async () => {
+  if (!sessionToken || Date.now() >= sessionExpiresAt) {
+    notionStatus.className = 'notion-status error';
+    notionStatus.textContent = '♡ 먼저 로그인해 줘.';
+    return;
+  }
+  notionButton.disabled = true;
+  notionStatus.className = 'notion-status';
+  notionStatus.textContent = '노션 PHOTO 목록 불러오는 중…';
+  notionItems.replaceChildren();
+  try {
+    const response = await fetch(API_URL + '/photos', {
+      method: 'POST',
+      headers: { Authorization: 'Bearer ' + sessionToken }
+    });
+    if (response.status === 401) {
+      disconnect('♡ 인증이 만료되었어 · 다시 연결해 줘.');
+      notionStatus.className = 'notion-status error';
+      notionStatus.textContent = '로그인 시간이 만료됐어. 다시 로그인해 줘.';
+      return;
+    }
+    if (!response.ok) throw new Error('HTTP ' + response.status);
+    const data = await response.json();
+    if (data.success !== true || !Array.isArray(data.items)) throw new Error('응답 형식 오류');
+    for (const item of data.items) {
+      const card = document.createElement('div');
+      card.className = 'notion-item';
+      const title = document.createElement('div');
+      title.className = 'notion-item-title';
+      title.textContent = typeof item.title === 'string' ? item.title : '제목 없음';
+      const meta = document.createElement('div');
+      meta.className = 'notion-item-meta';
+      meta.textContent = '사진 속성 ' + (Number.isFinite(item.photoCount) ? item.photoCount : 0) + '개';
+      card.append(title, meta);
+      notionItems.append(card);
+    }
+    notionStatus.textContent = '♡ ' + data.items.length + '개 항목 불러오기 성공' + (data.hasMore ? ' · 항목이 더 있어 (첫 50개만 표시)' : '');
+  } catch (error) {
+    notionStatus.className = 'notion-status error';
+    notionStatus.textContent = '목록을 불러오지 못했어 (' + error.message + ').';
+  } finally {
+    notionButton.disabled = false;
+  }
+});
+
 
 const photos=[];let mode='portrait';const grid=document.querySelector('#grid');const count=document.querySelector('#count');const fileInput=document.querySelector('#files');document.querySelector('#pick').onclick=()=>fileInput.click();document.querySelector('#clear').onclick=()=>{photos.forEach(p=>URL.revokeObjectURL(p.url));photos.length=0;render()};document.querySelector('#cols').onchange=e=>grid.style.setProperty('--cols',e.target.value);document.querySelectorAll('[data-mode]').forEach(b=>b.onclick=()=>{mode=b.dataset.mode;document.querySelectorAll('[data-mode]').forEach(x=>x.classList.toggle('active',x===b));if(mode!=='free')sort();render()});
 fileInput.onchange=async e=>{const incoming=[...e.target.files];for(const file of incoming){if(!file.type.startsWith('image/'))continue;const url=URL.createObjectURL(file);const dims=await new Promise(resolve=>{const img=new Image();img.onload=()=>resolve([img.naturalWidth,img.naturalHeight]);img.onerror=()=>resolve([0,0]);img.src=url});if(!dims[0]){URL.revokeObjectURL(url);continue}photos.push({id:crypto.randomUUID?crypto.randomUUID():String(Date.now()+Math.random()),url,w:dims[0],h:dims[1],name:file.name})}if(mode!=='free')sort();render();fileInput.value=''};

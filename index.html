@@ -313,9 +313,9 @@ function notionLink(url,id){const safe=safeNotionUrl(url);if(safe)return safe;co
 function openSchedule(item){
  const linked=Array.isArray(item.photos)?item.photos:[];
  const usable=linked.map(p=>({...p,href:notionLink(p.url,p.id)})).filter(p=>p.href);
- if(usable.length===1){location.assign(usable[0].href);return;}
- if(usable.length>1){document.getElementById('cal-dialog-title').textContent=item.title+' · PHOTO 선택';calDialogLinks.replaceChildren();for(const p of usable){const a=document.createElement('a');a.className='cal-photo-link';a.href=p.href;a.textContent='📸 '+(p.title||'PHOTO 열기');calDialogLinks.append(a);}calDialog.hidden=false;return;}
- const url=notionLink(item.notionUrl,item.id);if(url){location.assign(url);return;}
+ if(usable.length===1){window.open(usable[0].href,'_blank','noopener,noreferrer');return;}
+ if(usable.length>1){document.getElementById('cal-dialog-title').textContent=item.title+' · PHOTO 선택';calDialogLinks.replaceChildren();for(const p of usable){const a=document.createElement('a');a.className='cal-photo-link';a.href=p.href;a.target='_blank';a.rel='noopener noreferrer';a.textContent='📸 '+(p.title||'PHOTO 열기');calDialogLinks.append(a);}calDialog.hidden=false;return;}
+ const url=notionLink(item.notionUrl,item.id);if(url){window.open(url,'_blank','noopener,noreferrer');return;}
  scheduleStatus.className='notion-status error';scheduleStatus.textContent='이 일정의 노션 주소를 확인할 수 없어. 캘린더를 다시 불러와 줘.';
 }
 
